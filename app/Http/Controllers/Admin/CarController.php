@@ -48,4 +48,12 @@ class CarController extends Controller
         $status = $car->is_active ? 'activated' : 'deactivated';
         return back()->with('success', "Car {$status} successfully.");
     }
+
+    public function destroy(Car $car)
+    {
+        $car->delete();
+
+        return redirect()->route('admin.cars.index')
+            ->with('success', 'Car deleted successfully.');
+    }
 }

@@ -43,6 +43,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/cars/create',        [CarController::class, 'create'])->name('cars.create');
         Route::post('/cars',              [CarController::class, 'store'])->name('cars.store');
         Route::patch('/cars/{car}/toggle', [CarController::class, 'toggleActive'])->name('cars.toggle');
+        Route::delete('/cars/{car}',       [CarController::class, 'destroy'])->name('cars.destroy');
 
         // Reports
         Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');

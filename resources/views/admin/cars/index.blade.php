@@ -71,17 +71,29 @@
                         @endif
                     </td>
                     <td class="px-6 py-4 text-center">
-                        <form method="POST" action="{{ route('admin.cars.toggle', $car) }}">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit"
-                                    class="text-xs font-medium
-                                           {{ $car->is_active
-                                               ? 'text-red-500 hover:text-red-700'
-                                               : 'text-green-600 hover:text-green-700' }}">
-                                {{ $car->is_active ? 'Deactivate' : 'Activate' }}
-                            </button>
-                        </form>
+                        <div class="flex items-center justify-center gap-3">
+                            <form method="POST" action="{{ route('admin.cars.toggle', $car) }}">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit"
+                                        class="text-xs font-medium
+                                               {{ $car->is_active
+                                                   ? 'text-red-500 hover:text-red-700'
+                                                   : 'text-green-600 hover:text-green-700' }}">
+                                    {{ $car->is_active ? 'Deactivate' : 'Activate' }}
+                                </button>
+                            </form>
+
+                            <form method="POST" action="{{ route('admin.cars.destroy', $car) }}"
+                                  onsubmit="return confirm('Delete {{ $car->brand }} {{ $car->model }}? This cannot be undone.')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                        class="text-xs font-medium text-gray-400 hover:text-red-600">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @empty
